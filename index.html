@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de ferramentas - Igen</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<header class="cabecalho">
+  <div class="conteudo-cabecalho">
+      
+      <div class="logo-esquerda">
+        <img src="imagens/logo-igen.png" alt="igen" class="logo-igen">
+      </div>
+
+      <div class="container-busca">
+        <input type="text" id="busca" placeholder="Buscar ferramentas..." class="input-busca">
+      </div>
+
+      <div class="logo-direita">
+        <img src="imagens/logo-afip.png" alt="afip" class="logo-afip">
+      </div>
+
+      <!-- <div class="info-usuario">
+            <p>Instituto de Imunogenética</p>
+            <small>Painel de Ferramentas</small>
+        </div> -->
+    </div>
+    </header>
+
+    <nav class="menu-categorias">
+        <div class="dropdown" data-categoria="web">
+            <button class="item-nav ativo">Ferramentas Web ▼</button>
+            <ul class="submenu">
+                <li> <a href="https://marco.igen.org.br" target="_blank">M.A.R.Co</a></li>
+
+                <li> <a href="https://gerbase.igen.org.br" target="_blank">GE.R.BASE</a></li>  
+
+                <li> <a href="https://calculadorapra.igen.org.br" target="_blank">Calculadora PRA – Sorológicos IMGT/HLA</a></li>
+
+                <li> <a href="https://serotype.igen.org.br" target="_blank">Serotype</a></li>
+
+                <li> <a href="https://calculadorapra18ws.igen.org.br/calculadora" target="_blank">Calculadora PRA - sorotipos determinados no 18ºWS</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown" data-categoria="interna">
+            <button class="item-nav">Ferramentas Internas ▼</button>
+            <ul class="submenu">
+                <li><a href="https://sso.igen.org.br" target="_blank">Igen SSO – G1</a></li>
+
+                <li><a href="https://beadscan.igen.org.br" target="_blank">BeadScan</a></li>
+
+                <li><a href="http://vm-igen-102:9001/" target="_blank">Tipagem em massa</a></li>
+
+                <li><a href="http://vm-igen-102:8085/" target="_blank">Consulta de alelo HLA no IgenLab</a></li>
+
+                <li><a href="http://tools.igen.local:3600/" target="_blank">Alelos nulos – Redome</a></li>
+
+                <li><a href="http://vm-igen-102:3501" target="_blank">Preparo de Laudos</a></li>
+            </ul>
+        </div>
+
+        <div class="dropdown" data-categoria="desenvolvimento">
+            <button class="item-nav">Em Desenvolvimento</button>
+            <!-- <ul class="submenu">
+                <li><span>MFI vs FlowXM no DF</span></li>
+                <li><span>DSA Tracker</span></li>
+            </ul> -->
+        </div>
+    </nav>
+     <div class="tools-grid" id="container-ferramentas"></div>
+    <footer class="footer">
+        <p>&copy; 2025 IGEN Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script-cards.js"></script>
+</body>
+</html>

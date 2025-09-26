@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    background: #e3e9f3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: rgba(0,0,0,0.87);
+}
+
+.cabecalho {
+    background-color: #174a9e;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100; 
+}
+
+.conteudo-cabecalho {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+
+.logos-header {
+    display: flex;
+    align-items: center; 
+    gap: 1rem;
+    position: absolute;
+    left: 1rem;      
+}
+
+.logo-igen,
+.logo-afip {
+    height: 50px;
+    object-fit: contain;
+}
+
+.container-busca {
+    flex: 0 1 400px;
+    max-width: 400px;
+    margin: 0 2rem;
+}
+
+.input-busca {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 25px;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-busca:focus {
+    background: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* PARA LEMBRAR: info usuario é o que vai entrar ou não no canto direito do header / por enquanto esta o logo AFIP */
+
+/* .info-usuario {
+    text-align: right;
+    color: white;
+}
+
+.info-usuario p {
+    font-weight: 600;
+}
+
+.info-usuario small {
+    opacity: 0.9;
+    color: #f0f0f0;
+} */
+
+.menu-categorias {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.menu-categorias .item-nav {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #BECDE3;
+    color: rgba(0,0,0,0.87);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-categorias .item-nav:hover {
+    background: #aebfd9;
+}
+
+.menu-categorias .item-nav.ativo {
+    background: #9eb0cf;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    padding: 0.5rem 0;
+    margin: 0;
+    list-style: none;
+    min-width: 220px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    z-index: 100;
+}
+
+.submenu li {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: rgba(0,0,0,0.87);
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.submenu li:hover {
+    background: #f2f2f2;
+}
+
+.submenu a {
+    color: rgba(0,0,0,0.87);
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 1rem;
+}
+
+.submenu a:hover {
+    background: #f2f2f2;
+}
+
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+    padding: 1.5rem; 
+    max-width: 1400px; 
+    margin: 0 auto;  
+}
+
+.card-ferramenta {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.card-ferramenta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.titulo-card {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.logo-card {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.card-ferramenta h3 {
+    color: #174a9e;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.card-ferramenta p {
+    color: rgba(0,0,0,0.7);
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+/* Borda com cor azul ao redor do card, é uma opção tambem */
+/* .card-ferramenta {
+    border: 1px solid rgba(0,0,0,0.12);
+    transition: border-color 0.3s ease;
+}
+.card-ferramenta:hover {
+    border-color: #174a9e;
+} */
+
+
+
+
+.footer {
+    background: #174a9e;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    color: white;
+    margin-top: auto;
+}
