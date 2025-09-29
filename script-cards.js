@@ -154,27 +154,53 @@ function atualizarCategoria(categoria) {
 function buscarFerramentas(term) {
   if(!term) {
     renderizarFerramentas(ferramentas[categoriaAtual]);
+  // document.getElementById('titulo-categoria').textContent = titulosCategoria[categoriaAtual];
+  // document.getElementById('descricao-categoria').textContent = descricoesCategoria[categoriaAtual];
     return;
   }
 
   const todas = [...ferramentas.web, ...ferramentas.interna, ...ferramentas.desenvolvimento];
-  const filtradas = todas.filter(f => f.nome.toLowerCase().includes(term.toLowerCase()));
+  const filtradas = todas.filter(f => 
+    f.nome.toLowerCase().includes(term.toLowerCase()) ||
+    (f.descricao && f.descricao.toLowerCase().includes(term.toLowerCase()))
+  );
 
-  // Comentado porque os elementos não existem no HTML
   // document.getElementById('titulo-categoria').textContent = `Resultados da busca: "${term}"`;
   // document.getElementById('descricao-categoria').textContent = `${filtradas.length} ferramenta(s) encontrada(s)`;
-
-  renderizarFerramentas(filtradas);
-
-  document.getElementById('titulo-categoria').textContent = `Resultados da busca: "${term}"`;
-  document.getElementById('descricao-categoria').textContent = `${filtradas.length} ferramenta(s) encontrada(s)`;
 
   renderizarFerramentas(filtradas);
 }
 
 document.querySelectorAll('.dropdown').forEach(drop => {
-  const btn = drop.querySelector('.item-nav');
-  btn.addEventListener('click', () => atualizarCategoria(drop.dataset.categoria));
+  const btnCategoria = drop.querySelector('[data-acao="categoria"]');
+  const btnSeta = drop.querySelector('[data-acao="menu"]');
+  const submenu = drop.querySelector('.submenu');
+
+  btnCategoria.addEventListener('click', () => {
+    atualizarCategoria(drop.dataset.categoria);
+  });
+
+  if (btnSeta) {
+    btnSeta.addEventListener('click', (e) => {
+      e.stopPropagation(); // evita conflito com clique principal
+      // Fecha todos os outros menus abertos
+      document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
+        if (openDrop !== drop) {
+          openDrop.classList.remove('aberto');
+        }
+      });
+      // Alterna o menu atual
+      drop.classList.toggle('aberto');
+    });
+  }
+});
+
+document.addEventListener('click', (e) => {
+  document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
+    if (!openDrop.contains(e.target)) {
+      openDrop.classList.remove('aberto');
+    }
+  });
 });
 
 document.getElementById('busca').addEventListener('input', e => buscarFerramentas(e.target.value));

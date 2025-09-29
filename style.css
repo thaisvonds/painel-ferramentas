@@ -1,3 +1,81 @@
+/* MOBILE - até 600px */
+@media (max-width: 600px) {
+    .cabecalho {
+        padding: 0.2rem 0.5rem;
+    }
+    .conteudo-cabecalho {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        max-width: 100%;
+    }
+    .logo-esquerda, .logo-direita {
+        display: flex;
+        align-items: center;
+    }
+    .logo-igen, .logo-afip {
+        height: 24px;
+        margin: 0;
+    }
+    .container-busca {
+        flex: 1;
+        margin: 0 0.5rem;
+        max-width: 100%;
+    }
+    .container-busca {
+        max-width: 100%;
+        margin: 0.5rem 0;
+    }
+    .menu-categorias {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        align-items: stretch;
+    }
+    .item-nav-wrapper {
+        flex-direction: row;
+        width: 100%;
+        border-radius: 16px;
+        box-shadow: none;
+    }
+    .item-nav, .seta-dropdown {
+        font-size: 0.95rem;
+        padding: 0.6rem 0.7rem;
+    }
+    .tools-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 0.7rem !important;
+        padding: 0.5rem !important;
+        max-width: 100% !important;
+    }
+    .card-ferramenta {
+        padding: 8px;
+        font-size: 0.85rem;
+        border-radius: 10px;
+    }
+    .titulo-card {
+        gap: 0.3rem;
+    }
+    .logo-card {
+        width: 32px;
+        height: 32px;
+        margin-right: 4px;
+    }
+    .footer {
+        padding: 1rem;
+        font-size: 0.95rem;
+    }
+    .submenu {
+        min-width: 160px;
+        font-size: 0.95rem;
+        left: 0;
+        right: auto;
+    }
+}
 * {
     margin: 0;
     padding: 0;
@@ -96,7 +174,7 @@ body {
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 25px;
-    background-color: #BECDE3;
+    background-color: #dbe6f7;
     color: rgba(0,0,0,0.87);
     font-weight: 600;
     cursor: pointer;
@@ -115,6 +193,55 @@ body {
     position: relative;
     display: inline-block;
 }
+
+.item-nav-wrapper {
+    display: flex;
+    align-items: center;
+        background-color: #dbe6f7;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.item-nav {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+    background: #dbe6f7;
+  font-weight: 600;
+  color: rgba(0,0,0,0.87);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.item-nav:hover {
+    background: #c7d6ed;
+}
+
+.seta-dropdown {
+    background: #dbe6f7;
+    border: none;
+    border-left: 1px solid #b0bed6;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #174a9e;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.seta-dropdown:hover {
+    background: #c7d6ed;
+    color: #0d2c5a;
+}
+
+.dropdown .submenu {
+  display: none;
+}
+
+.dropdown.aberto .submenu {
+  display: block;
+}
+
 
 .submenu {
     display: none;
@@ -155,9 +282,7 @@ body {
 }
 
 
-.dropdown:hover .submenu {
-    display: block;
-}
+/* Removido para abrir apenas ao clicar na seta */
 
 .tools-grid {
     display: grid;

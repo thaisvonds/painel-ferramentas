@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,46 +32,52 @@
 
     <nav class="menu-categorias">
         <div class="dropdown" data-categoria="web">
-            <button class="item-nav ativo">Ferramentas Web ▼</button>
-            <ul class="submenu">
-                <li> <a href="https://marco.igen.org.br" target="_blank">M.A.R.Co</a></li>
+  <div class="item-nav-wrapper">
+    <button class="item-nav" data-acao="categoria">Ferramentas Web</button>
+    <button class="seta-dropdown" data-acao="menu">▼</button>
+  </div>
+  <ul class="submenu">
+    <li><a href="https://marco.igen.org.br" target="_blank">M.A.R.Co</a></li>
+    <li><a href="https://gerbase.igen.org.br" target="_blank">GE.R.BASE</a></li>
+    <li><a href="https://calculadorapra.igen.org.br" target="_blank">Calculadora PRA – Sorológicos IMGT/HLA</a></li>
+    <li><a href="https://serotype.igen.org.br" target="_blank">Serotype</a></li>
+    <li><a href="https://calculadorapra18ws.igen.org.br/calculadora" target="_blank">Calculadora PRA - sorotipos determinados no 18ºWS</a></li>
+  </ul>
+</div>
 
-                <li> <a href="https://gerbase.igen.org.br" target="_blank">GE.R.BASE</a></li>  
+<div class="dropdown" data-categoria="interna">
+  <div class="item-nav-wrapper">
+    <button class="item-nav" data-acao="categoria">Ferramentas Internas</button>
+    <button class="seta-dropdown" data-acao="menu">▼</button>
+  </div>
+  <ul class="submenu">
+    <li><a href="https://sso.igen.org.br" target="_blank">Igen SSO – G1</a></li>
+    <li><a href="https://beadscan.igen.org.br" target="_blank">BeadScan</a></li>
+    <li><a href="http://vm-igen-102:9001/" target="_blank">Tipagem em massa</a></li>
+    <li><a href="http://vm-igen-102:8085/" target="_blank">Consulta de alelo HLA no IgenLab</a></li>
+    <li><a href="http://tools.igen.local:3600/" target="_blank">Alelos nulos – Redome</a></li>
+    <li><a href="http://vm-igen-102:3501" target="_blank">Preparo de Laudos</a></li>
+  </ul>
+</div>
 
-                <li> <a href="https://calculadorapra.igen.org.br" target="_blank">Calculadora PRA – Sorológicos IMGT/HLA</a></li>
-
-                <li> <a href="https://serotype.igen.org.br" target="_blank">Serotype</a></li>
-
-                <li> <a href="https://calculadorapra18ws.igen.org.br/calculadora" target="_blank">Calculadora PRA - sorotipos determinados no 18ºWS</a></li>
-            </ul>
-        </div>
-
-        <div class="dropdown" data-categoria="interna">
-            <button class="item-nav">Ferramentas Internas ▼</button>
-            <ul class="submenu">
-                <li><a href="https://sso.igen.org.br" target="_blank">Igen SSO – G1</a></li>
-
-                <li><a href="https://beadscan.igen.org.br" target="_blank">BeadScan</a></li>
-
-                <li><a href="http://vm-igen-102:9001/" target="_blank">Tipagem em massa</a></li>
-
-                <li><a href="http://vm-igen-102:8085/" target="_blank">Consulta de alelo HLA no IgenLab</a></li>
-
-                <li><a href="http://tools.igen.local:3600/" target="_blank">Alelos nulos – Redome</a></li>
-
-                <li><a href="http://vm-igen-102:3501" target="_blank">Preparo de Laudos</a></li>
-            </ul>
-        </div>
-
-        <div class="dropdown" data-categoria="desenvolvimento">
-            <button class="item-nav">Em Desenvolvimento</button>
+<div class="dropdown" data-categoria="desenvolvimento">
+  <div class="item-nav-wrapper">
+    <button class="item-nav" data-acao="categoria">Em Desenvolvimento</button>
+  </div>
+</div>
             <!-- <ul class="submenu">
                 <li><span>MFI vs FlowXM no DF</span></li>
                 <li><span>DSA Tracker</span></li>
             </ul> -->
         </div>
     </nav>
-     <div class="tools-grid" id="container-ferramentas"></div>
+            <!--
+            <div style="text-align:center; margin-bottom:1rem;">
+                <h2 id="titulo-categoria"></h2>
+                <p id="descricao-categoria"></p>
+            </div>
+            -->
+        <div class="tools-grid" id="container-ferramentas"></div>
     <footer class="footer">
         <p>&copy; 2025 IGEN Todos os direitos reservados.</p>
     </footer>
