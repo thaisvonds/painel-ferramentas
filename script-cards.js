@@ -87,7 +87,7 @@ const ferramentas = {
     },
 
     {
-      nome: "DSA Tracker",
+      nome: "FlowXM Tracker",
       descricao: "Substituir a busca do access com o incremento de trazer os MFIs dos DSAs (com a mesma regra do relatório “MFI vs FlowXM”)."
     }
   ]
@@ -165,9 +165,6 @@ function buscarFerramentas(term) {
     (f.descricao && f.descricao.toLowerCase().includes(term.toLowerCase()))
   );
 
-  // document.getElementById('titulo-categoria').textContent = `Resultados da busca: "${term}"`;
-  // document.getElementById('descricao-categoria').textContent = `${filtradas.length} ferramenta(s) encontrada(s)`;
-
   renderizarFerramentas(filtradas);
 }
 
@@ -182,7 +179,7 @@ document.querySelectorAll('.dropdown').forEach(drop => {
 
   if (btnSeta) {
     btnSeta.addEventListener('click', (e) => {
-      e.stopPropagation(); // evita conflito com clique principal
+      e.stopPropagation(); // para evitar conflito com clique principal
       // Fecha todos os outros menus abertos
       document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
         if (openDrop !== drop) {
