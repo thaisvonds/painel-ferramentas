@@ -12,12 +12,13 @@ body {
     display: flex;
     flex-direction: column;
     color: rgba(0,0,0,0.87);
+    overflow-x: hidden; /* evita scroll horizontal */
 }
 
 .cabecalho {
     background-color: #174a9e;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 1rem 2rem;
+    padding: 1rem 0; /* horizontal padding controlled by .site-inner */
     position: sticky;
     top: 0;
     z-index: 100; 
@@ -30,6 +31,16 @@ body {
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
+}
+
+/* Container central que controla padding e largura do conteúdo
+   mantendo header/footer com fundo full-width */
+.site-inner {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
 }
 
 
@@ -91,6 +102,9 @@ body {
     gap: 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .menu-categorias .item-nav {
@@ -214,9 +228,12 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.2rem;
-    padding: 1.5rem; 
-    max-width: 1400px; 
-    margin: 0 auto;  
+    padding: 1.5rem 0; 
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .card-ferramenta {
@@ -350,4 +367,37 @@ body {
         left: 0;
         right: auto;
     }
+}
+
+/* Tablets e e-readers (iPad, Kindle Fire) - manter cards, ajustar header/footer */
+@media (min-width: 601px) and (max-width: 1280px) {
+    /* header/footer background full-width; conteúdo centralizado com padding interno */
+    .cabecalho, .footer {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .conteudo-cabecalho {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .tools-grid {
+        max-width: 1000px; /* mantém os cards como estão, mas centraliza a grade */
+        margin: 0 auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .logo-igen { height: 48px; }
+    .logo-afip { height: 42px; }
+}
+
+/* Portrait tablets (iPad vertical / Kindle vertical) — garantir header/footer visíveis */
+@media (orientation: portrait) and (min-width: 601px) and (max-width: 1024px) {
+    .cabecalho { padding-top: 0.6rem; padding-bottom: 0.6rem; }
+    .footer { padding-top: 0.8rem; padding-bottom: 0.8rem; }
+    .conteudo-cabecalho { padding: 0 0.75rem; }
+    .tools-grid { padding-left: 0.75rem; padding-right: 0.75rem; }
 }

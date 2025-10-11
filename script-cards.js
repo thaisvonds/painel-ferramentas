@@ -15,22 +15,22 @@ const ferramentas = {
     },
 
     {
-      nome: "Calculadora PRA – sorológicos IMGT/HLA",
-      descricao: "Calcula a % PRA I, II, e I+II com base nos sorológicos clássicos",
+      nome: "Calculadora Sorológica",
+      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorológicos clássicos.",
       url: "https://calculadorapra.igen.org.br/calculadora",
       logo: "imagens/logo-pra-imgt.png"
     },
 
     {
       nome: "Serotype",
-      descricao: "O programa mostra quais beads dos kits comerciais representam melhor o alelo determinado (ou imputado) de um indivíduo.",
-      url: "https://sorotipos18ws-v2.igen.org.br/pt-BR",
+      descricao: "Mapeia alelos HLA aos seus sorotipos correspondentes para identificar as beads presentes em kits comerciais, fornecendo dados complementares como especificidades sorológicas, status Bw, CIWD e grupos P.",
+      url: "https://www.igen.org.br/sorotipos18ws/",
       logo: "imagens/serotype.png"
     },
 
     {
-      nome: "Calculadora PRA – sorotipos determinados no 18ºWS",
-      descricao: "Calculadora que converte dados em alta resolução para os sorotipos do 18.º Workshop Internacional, garantindo cálculos precisos. Não compatível com sorológicos IMGT/HLA.",
+      nome: "Calculadora PRA – 18ºWS",
+      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorotipos determinados no 18° WS.                                                             ",
       url: "https://calculadorapra18ws.igen.org.br/calculadora",
       logo: "imagens/pra-18.png"
     }
@@ -88,7 +88,7 @@ const ferramentas = {
 
     {
       nome: "FlowXM Tracker",
-      descricao: "Substituir a busca do access com o incremento de trazer os MFIs dos DSAs (com a mesma regra do relatório “MFI vs FlowXM”)."
+      descricao: "Substituir a busca do access com o incremento de trazer os MFIs dos DSAs (com a mesma regra do relatório 'MFI vs FlowXM')."
     }
   ]
 };
@@ -151,22 +151,33 @@ function atualizarCategoria(categoria) {
   renderizarFerramentas(ferramentas[categoria]);
 }
 
+function normalizeText(text) {
+  return text
+    .normalize("NFD")                   // separa acentos
+    .replace(/[\u0300-\u036f]/g, "")    // remove acentos
+    .replace(/[^a-zA-Z0-9\s]/g, "")     // remove pontuação
+    .replace(/\s+/g, " ")               // normaliza espaços
+    .trim()
+    .toLowerCase();
+}
+
 function buscarFerramentas(term) {
   if(!term) {
     renderizarFerramentas(ferramentas[categoriaAtual]);
-  // document.getElementById('titulo-categoria').textContent = titulosCategoria[categoriaAtual];
-  // document.getElementById('descricao-categoria').textContent = descricoesCategoria[categoriaAtual];
     return;
   }
 
+  const query = normalizeText(term);
   const todas = [...ferramentas.web, ...ferramentas.interna, ...ferramentas.desenvolvimento];
+
   const filtradas = todas.filter(f => 
-    f.nome.toLowerCase().includes(term.toLowerCase()) ||
-    (f.descricao && f.descricao.toLowerCase().includes(term.toLowerCase()))
+    normalizeText(f.nome).includes(query) ||
+    (f.descricao && normalizeText(f.descricao).includes(query))
   );
 
   renderizarFerramentas(filtradas);
 }
+
 
 document.querySelectorAll('.dropdown').forEach(drop => {
   const btnCategoria = drop.querySelector('[data-acao="categoria"]');
