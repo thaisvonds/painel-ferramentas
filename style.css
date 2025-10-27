@@ -52,7 +52,11 @@ body {
     left: 1rem;      
 }
 
-.logo-igen,
+.logo-igen {
+    height: 58px;
+    object-fit: contain;
+}
+
 .logo-afip {
     height: 50px;
     object-fit: contain;
@@ -111,7 +115,7 @@ body {
     padding: 0.75rem 1.5rem;
     border: none;
     border-radius: 25px;
-    background-color: #dbe6f7;
+    background-color: #bfd0e9;
     color: rgba(0,0,0,0.87);
     font-weight: 600;
     cursor: pointer;
@@ -119,7 +123,7 @@ body {
 }
 
 .menu-categorias .item-nav:hover {
-    background: #aebfd9;
+    background: #85a0c9;
 }
 
 .menu-categorias .item-nav.ativo {
@@ -245,7 +249,8 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.12);
     cursor: pointer;
     text-decoration: none;
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-ferramenta:hover {
@@ -280,6 +285,16 @@ body {
     font-size: 0.9rem;
 }
 
+/* Desktop / tablet: garantir altura mínima uniforme para cards (preserva mobile) */
+@media (min-width: 601px) {
+    .card-ferramenta {
+        min-height: 240px;
+    }
+    .card-ferramenta p {
+        flex: 1 0 auto;
+    }
+}
+
 
 .footer {
     background: #174a9e;
@@ -307,7 +322,11 @@ body {
         display: flex;
         align-items: center;
     }
-    .logo-igen, .logo-afip {
+    .logo-igen {
+        height: 1.25rem; /* mobile: aumentar levemente IGEN */
+        margin: 0 0.2rem;
+    }
+    .logo-afip {
         height: 1.1rem;
         margin: 0 0.2rem;
     }
@@ -390,7 +409,7 @@ body {
         padding-right: 1rem;
     }
 
-    .logo-igen { height: 48px; }
+    .logo-igen { height: 52px; }
     .logo-afip { height: 42px; }
 }
 

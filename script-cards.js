@@ -77,9 +77,31 @@ const ferramentas = {
       descricao: "Agrupa tipificação HLA, PRA e prova cruzada de um paciente, incluindo XM virtual e doadores vinculados.",
       url: "http://vm-igen-102:3501",
       logo: "imagens/laudos.png"
-    }
-
+    }  
   ],
+ online: [
+    {
+      nome: "Nomenclatura HLA",
+      descricao: "Reúne informações atualizadas sobre os alelos HLA, sequências, variações e histórico de revisões. Além disso, o site apresenta classificações importantes como os grupos P e os grupos G.",
+      url: "https://hla.alleles.org/",
+      logo: "imagens/alleles.svg"
+    },
+
+    {
+      nome: "Consulta de Alelos",
+      descricao: "A Ferramenta de Consulta de Alelos IPD-IMGT/HLA oferece uma interface de consulta avançada que permite aos usuários gerar consultas personalizáveis ​​para o banco de dados IPD-IMGT/HLA",
+      url: "https://www.ebi.ac.uk/ipd/imgt/hla/alleles/",
+      logo: "imagens/alleles.svg"
+    },
+
+   {
+      nome: "MAC UI",
+      descricao: "A MAC UI é uma ferramenta da NMDP usada para codificar e decodificar ambiguidades em tipagens HLA por meio dos códigos MAC, garantindo padronização, consistência e compatibilidade entre laboratórios e sistemas de registro.",
+      url: "https://hml.nmdp.org/MacUI/#/",
+      logo: "imagens/nmdp.svg"
+    },
+  ],
+
   desenvolvimento: [
     {
       nome: "MFI vs FlowXM no DF",
@@ -135,7 +157,41 @@ function renderizarFerramentas(lista) {
 
     container.appendChild(card);
   });
+
+    // após renderizar, equaliza alturas conforme largura da tela
+    equalizeCardHeights();
 }
+
+  // equaliza as alturas dos cards (aplica apenas em telas maiores que breakpoint)
+  function equalizeCardHeights() {
+    const cards = Array.from(document.querySelectorAll('.card-ferramenta'));
+    if (!cards.length) return;
+
+    // reset
+    cards.forEach(c => c.style.height = 'auto');
+
+    const MOBILE_BREAKPOINT = 600;
+    if (window.innerWidth > MOBILE_BREAKPOINT) {
+      const max = cards.reduce((m, c) => Math.max(m, c.offsetHeight), 0);
+      cards.forEach(c => c.style.height = max + 'px');
+    } else {
+      // em mobile, deixar automático
+      cards.forEach(c => c.style.height = 'auto');
+    }
+  }
+
+  // debounce helper
+  function debounce(fn, wait = 120) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(() => fn.apply(this, args), wait);
+    };
+  }
+
+  window.addEventListener('resize', debounce(() => {
+    equalizeCardHeights();
+  }, 150));
 
 function atualizarCategoria(categoria) {
   categoriaAtual = categoria;
@@ -146,7 +202,13 @@ function atualizarCategoria(categoria) {
 //   document.getElementById('descricao-categoria').textContent = descricoesCategoria[categoria];
 
   document.querySelectorAll('.item-nav').forEach(item => item.classList.remove('ativo'));
-  document.querySelector(`[data-categoria="${categoria}"] .item-nav`).classList.add('ativo');
+  const categoriaBtn = document.querySelector(`[data-categoria="${categoria}"] .item-nav`);
+  if (categoriaBtn) {
+    categoriaBtn.classList.add('ativo');
+  } else {
+    // caso o botão não seja encontrado, logamos para ajudar no debug sem interromper o script
+    console.warn(`Botão da categoria '${categoria}' não encontrado no DOM.`);
+  }
 
   renderizarFerramentas(ferramentas[categoria]);
 }
@@ -179,38 +241,63 @@ function buscarFerramentas(term) {
 }
 
 
-document.querySelectorAll('.dropdown').forEach(drop => {
-  const btnCategoria = drop.querySelector('[data-acao="categoria"]');
-  const btnSeta = drop.querySelector('[data-acao="menu"]');
-  const submenu = drop.querySelector('.submenu');
+function initUI() {
+  // dropdowns: adiciona listeners somente se os elementos existirem
+  document.querySelectorAll('.dropdown').forEach(drop => {
+    const btnCategoria = drop.querySelector('[data-acao="categoria"]');
+    const btnSeta = drop.querySelector('[data-acao="menu"]');
 
-  btnCategoria.addEventListener('click', () => {
-    atualizarCategoria(drop.dataset.categoria);
-  });
-
-  if (btnSeta) {
-    btnSeta.addEventListener('click', (e) => {
-      e.stopPropagation(); // para evitar conflito com clique principal
-      // Fecha todos os outros menus abertos
-      document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
-        if (openDrop !== drop) {
-          openDrop.classList.remove('aberto');
-        }
+    if (btnCategoria) {
+      btnCategoria.addEventListener('click', () => {
+        atualizarCategoria(drop.dataset.categoria);
       });
-      // Alterna o menu atual
-      drop.classList.toggle('aberto');
-    });
-  }
-});
+    } else {
+      console.warn('Dropdown sem botão de categoria encontrado:', drop);
+    }
 
-document.addEventListener('click', (e) => {
-  document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
-    if (!openDrop.contains(e.target)) {
-      openDrop.classList.remove('aberto');
+    if (btnSeta) {
+      btnSeta.addEventListener('click', (e) => {
+        e.stopPropagation(); // para evitar conflito com clique principal
+        // Fecha todos os outros menus abertos
+        document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
+          if (openDrop !== drop) {
+            openDrop.classList.remove('aberto');
+          }
+        });
+        // Alterna o menu atual
+        drop.classList.toggle('aberto');
+      });
     }
   });
-});
 
-document.getElementById('busca').addEventListener('input', e => buscarFerramentas(e.target.value));
+  // clique global fecha dropdowns abertos
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
+      if (!openDrop.contains(e.target)) {
+        openDrop.classList.remove('aberto');
+      }
+    });
+  });
 
-renderizarFerramentas(ferramentas[categoriaAtual]);
+  // busca
+  const buscaEl = document.getElementById('busca');
+  if (buscaEl) {
+    buscaEl.addEventListener('input', e => buscarFerramentas(e.target.value));
+  } else {
+    console.warn('Elemento de busca (id="busca") não encontrado no DOM.');
+  }
+
+  // render inicial
+  try {
+    renderizarFerramentas(ferramentas[categoriaAtual]);
+  } catch (err) {
+    console.error('Erro ao renderizar ferramentas:', err);
+  }
+}
+
+// Inicializa a UI quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initUI);
+} else {
+  initUI();
+}
