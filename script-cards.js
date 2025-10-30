@@ -1,5 +1,27 @@
 const ferramentas = {
   web: [
+
+    {
+      nome: "Calculadora cPRA",
+      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorológicos clássicos.",
+      url: "https://calculadorapra.igen.org.br/calculadora",
+      logo: "imagens/logo-pra-imgt.png"
+    },
+
+    {
+      nome: "Calculadora cPRA – 18ºIHIWS",
+      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorotipos determinados no 18° WS.                                                             ",
+      url: "https://calculadorapra18ws.igen.org.br/calculadora",
+      logo: "imagens/pra-18.png"
+    },
+
+    {
+      nome: "Sorotipo V2 e LSA",
+      descricao: "Mapeia alelos HLA aos seus sorotipos correspondentes para identificar as beads presentes em kits comerciais, fornecendo dados complementares como especificidades sorológicas, status Bw, CIWD e grupos P.",
+      url: "https://www.igen.org.br/sorotipos18ws/",
+      logo: "imagens/serotype.png"
+    },
+
     {
       nome: "M.A.R.Co",
       descricao: "Analisa correlações de MFI entre antígenos HLA para definir cutoffs personalizados e identificar discrepâncias.",
@@ -14,26 +36,7 @@ const ferramentas = {
       logo: "imagens/gerbase.png"
     },
 
-    {
-      nome: "Calculadora Sorológica",
-      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorológicos clássicos.",
-      url: "https://calculadorapra.igen.org.br/calculadora",
-      logo: "imagens/logo-pra-imgt.png"
-    },
 
-    {
-      nome: "Serotype",
-      descricao: "Mapeia alelos HLA aos seus sorotipos correspondentes para identificar as beads presentes em kits comerciais, fornecendo dados complementares como especificidades sorológicas, status Bw, CIWD e grupos P.",
-      url: "https://www.igen.org.br/sorotipos18ws/",
-      logo: "imagens/serotype.png"
-    },
-
-    {
-      nome: "Calculadora PRA – 18ºWS",
-      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorotipos determinados no 18° WS.                                                             ",
-      url: "https://calculadorapra18ws.igen.org.br/calculadora",
-      logo: "imagens/pra-18.png"
-    }
 
   ],
   interna: [
@@ -100,6 +103,13 @@ const ferramentas = {
       url: "https://hml.nmdp.org/MacUI/#/",
       logo: "imagens/nmdp.svg"
     },
+
+    {
+      nome: "HLA Molecules Directory",
+      descricao: "É uma base de dados online que fornece modelos tridimensionais (3D) de moléculas de HLA (alelos) gerados por homology modeling.",
+      url: "https://www.phla3d.com.br/alleles/index",
+      logo: "imagens/phla.jpeg"
+    },
   ],
 
   desenvolvimento: [
@@ -118,13 +128,15 @@ const ferramentas = {
 const titulosCategoria = {
   web: "Ferramentas Web",
   interna: "Ferramentas Internas",
-  desenvolvimento: "Em desenvolvimento"
+  desenvolvimento: "Em desenvolvimento",
+  online: "Ferramentas Online"
 };
 
 const descricoesCategoria = {
   web: "Ferramentas acessíveis publicamente",
   interna: "Ferramentas da rede interna",
-  desenvolvimento: "Ferramentas em desenvolvimento"
+  desenvolvimento: "Ferramentas em desenvolvimento",
+  online: "Ferramentas externas e online"
 };
 
 let categoriaAtual = 'web';
@@ -180,7 +192,6 @@ function renderizarFerramentas(lista) {
     }
   }
 
-  // debounce helper
   function debounce(fn, wait = 120) {
     let t;
     return (...args) => {
@@ -230,7 +241,12 @@ function buscarFerramentas(term) {
   }
 
   const query = normalizeText(term);
-  const todas = [...ferramentas.web, ...ferramentas.interna, ...ferramentas.desenvolvimento];
+  const todas = [
+    ...ferramentas.web,
+    ...ferramentas.interna,
+    ...(ferramentas.online || []),
+    ...ferramentas.desenvolvimento
+  ];
 
   const filtradas = todas.filter(f => 
     normalizeText(f.nome).includes(query) ||
@@ -240,9 +256,7 @@ function buscarFerramentas(term) {
   renderizarFerramentas(filtradas);
 }
 
-
 function initUI() {
-  // dropdowns: adiciona listeners somente se os elementos existirem
   document.querySelectorAll('.dropdown').forEach(drop => {
     const btnCategoria = drop.querySelector('[data-acao="categoria"]');
     const btnSeta = drop.querySelector('[data-acao="menu"]');
