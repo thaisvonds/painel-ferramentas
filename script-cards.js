@@ -40,12 +40,6 @@ const ferramentas = {
 
   ],
   interna: [
-    {
-      nome: "Igen SSO – G1",
-      descricao: "Busca, através de um encaminhamento, os genótipos classificados como G1 de uma tipagem HLA realizada por SSO.",
-      url: "https://sso.igen.org.br",
-      logo: "imagens/igen-sso.png"
-    },
 
     {
       nome: "BeadScan",
@@ -68,6 +62,43 @@ const ferramentas = {
       logo: "imagens/igenlab.png"
     },
 
+
+    {
+      nome: "Preparo de Laudos",
+      descricao: "Agrupa tipificação HLA, PRA e prova cruzada de um paciente, incluindo XM virtual e doadores vinculados.",
+      url: "http://vm-igen-102:3501",
+      logo: "imagens/laudos.png"
+    },
+
+    {
+      nome: "HLA Signal Peptide Mismatch Tool",
+      descricao: "Descrição",
+      url: "http://vm-igen-102:18080/",
+      logo: "imagens/peptide.svg" 
+
+    },
+
+    {
+      nome: "Prova Cruzada Virtual vs FlowXm",
+      descricao: "Descrição.",
+      url: "http://df-fcxm/",
+      logo: "imagens/provacruzada.svg"
+    },
+
+    {
+      nome: "Faseador HLA",
+      descricao: "Descrição.",
+      url: "http://vm-igen-119:8501/",
+      logo: "imagens/faseador.png"
+    },
+
+    {
+      nome: "Busca e contagem de Alelo no Redome",
+      descricao: "Descrição",
+      url: "http://vm-igen-119:8095/",
+      logo: "imagens/buscaredome.png"
+    },
+
     {
       nome: "Alelos nulos – Redome",
       descricao: "Relatório de HLAs prováveis erros disponibilizados pelo Redome. Permite adicionar novos alelos para monitoramento.",
@@ -76,40 +107,91 @@ const ferramentas = {
     },
 
     {
-      nome: "Preparo de Laudos",
-      descricao: "Agrupa tipificação HLA, PRA e prova cruzada de um paciente, incluindo XM virtual e doadores vinculados.",
-      url: "http://vm-igen-102:3501",
-      logo: "imagens/laudos.png"
-    }  
+      nome: "Tipagem Redome",
+      descricao: "Descrição",
+      url: "http://vm-igen-119:4301/redome",
+      logo: "imagens/redometipagem.png" 
+
+    },
+
+    {
+      nome: "Conversor CareDx para IgenLab",
+      descricao: "Converte o arquivo gerado pelo software AlloSeq Assign em um arquivo compatível para importação de resultados ao Igenlab.",
+      url: "http://172.22.33.147:8181/",
+      logo: "imagens/caredx.jpeg"
+    },
+
+   {
+      nome: "Igen SSO – G1",
+      descricao: "Busca, através de um encaminhamento, os genótipos classificados como G1 de uma tipagem HLA realizada por SSO.",
+      url: "https://sso.igen.org.br",
+      logo: "imagens/igen-sso.png"
+    },
+
+
+    {
+      nome: "Igenlab-CT",
+      descricao: "Ferramenta para preencher os dados da central de transplantes com dados do Igenlab",
+      url: "http://tools.igenlab.igen.local:4000/",
+      logo: "imagens/igenct.png"
+    }
   ],
  online: [
     {
       nome: "Nomenclatura HLA",
-      descricao: "Reúne informações atualizadas sobre os alelos HLA, sequências, variações e histórico de revisões. Além disso, o site apresenta classificações importantes como os grupos P e os grupos G.",
+      descricao: "Banco de dados oficial para nomenclatura dos genes do sistema HLA (Antígeno Leucocitário Humano).",
       url: "https://hla.alleles.org/",
       logo: "imagens/alleles.svg"
     },
 
     {
       nome: "Consulta de Alelos",
-      descricao: "A Ferramenta de Consulta de Alelos IPD-IMGT/HLA oferece uma interface de consulta avançada que permite aos usuários gerar consultas personalizáveis ​​para o banco de dados IPD-IMGT/HLA",
+      descricao: "Ferramenta que permite realizar consultas personalizadas ao banco de dados IPD-IMGT/HLA, possibilitando a busca detalhada de informações sobre alelos e suas características moleculares.",
       url: "https://www.ebi.ac.uk/ipd/imgt/hla/alleles/",
       logo: "imagens/alleles.svg"
     },
 
    {
-      nome: "MAC UI",
-      descricao: "A MAC UI é uma ferramenta da NMDP usada para codificar e decodificar ambiguidades em tipagens HLA por meio dos códigos MAC, garantindo padronização, consistência e compatibilidade entre laboratórios e sistemas de registro.",
+      nome: "Broads e Splits",
+      descricao: "Lista de Broad, Splits e Antígenos Associados.",
+      url: "https://hla.alleles.org/pages/antigens/broads_and_splits/",
+      logo: "imagens/alleles.svg"
+    },
+
+   {
+      nome: "MAC UI (NMDP)",
+      descricao: "Interface para converter ambiguidades de alelos de tipificações HLA em códigos MAC (codifica/decodifica).",
       url: "https://hml.nmdp.org/MacUI/#/",
       logo: "imagens/nmdp.svg"
     },
 
     {
-      nome: "HLA Molecules Directory",
-      descricao: "É uma base de dados online que fornece modelos tridimensionais (3D) de moléculas de HLA (alelos) gerados por homology modeling.",
+      nome: "pHLA 3D",
+      descricao: "Banco de dados com modelos 3D inferidos de moléculas HLA, voltado à análise de resíduos de aminoácidos.",
       url: "https://www.phla3d.com.br/alleles/index",
       logo: "imagens/phla.jpeg"
     },
+
+    {
+      nome: "Fully Sequenced KIR Haplotypes",
+      descricao: "Ilustração da composição de haplótipos KIR sequenciados.",
+      url: "https://www.ebi.ac.uk/ipd/kir/about/haplotypes/sequenced/",
+      logo: "imagens/ebi.jpg"
+    },
+
+    {
+      nome: "Frequência de Alelos (DataBase)",
+      descricao: "Repertório público de dados de frequência alélica, haplotípica e genotípica do sistema HLA, KIR, MIC e Citocinas no mundo.",
+      url: "http://www.allelefrequencies.net/",
+      logo: "imagens/allelefrequency.png"
+    },
+
+    {
+      nome: "HaploStats",
+      descricao: "Ferramenta de análise e inferência estatística de haplótipos a partir de dados genotípicos.",
+      url: "https://www.haplostats.org/haplostats?execution=e2s1",
+      logo: "imagens/haplo.png"
+    }
   ],
 
   desenvolvimento: [
@@ -174,12 +256,10 @@ function renderizarFerramentas(lista) {
     equalizeCardHeights();
 }
 
-  // equaliza as alturas dos cards (aplica apenas em telas maiores que breakpoint)
   function equalizeCardHeights() {
     const cards = Array.from(document.querySelectorAll('.card-ferramenta'));
     if (!cards.length) return;
 
-    // reset
     cards.forEach(c => c.style.height = 'auto');
 
     const MOBILE_BREAKPOINT = 600;
@@ -187,7 +267,6 @@ function renderizarFerramentas(lista) {
       const max = cards.reduce((m, c) => Math.max(m, c.offsetHeight), 0);
       cards.forEach(c => c.style.height = max + 'px');
     } else {
-      // em mobile, deixar automático
       cards.forEach(c => c.style.height = 'auto');
     }
   }
@@ -217,7 +296,7 @@ function atualizarCategoria(categoria) {
   if (categoriaBtn) {
     categoriaBtn.classList.add('ativo');
   } else {
-    // caso o botão não seja encontrado, logamos para ajudar no debug sem interromper o script
+
     console.warn(`Botão da categoria '${categoria}' não encontrado no DOM.`);
   }
 
@@ -271,20 +350,18 @@ function initUI() {
 
     if (btnSeta) {
       btnSeta.addEventListener('click', (e) => {
-        e.stopPropagation(); // para evitar conflito com clique principal
-        // Fecha todos os outros menus abertos
+        e.stopPropagation();
+
         document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
           if (openDrop !== drop) {
             openDrop.classList.remove('aberto');
           }
         });
-        // Alterna o menu atual
         drop.classList.toggle('aberto');
       });
     }
   });
 
-  // clique global fecha dropdowns abertos
   document.addEventListener('click', (e) => {
     document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
       if (!openDrop.contains(e.target)) {
@@ -293,7 +370,6 @@ function initUI() {
     });
   });
 
-  // busca
   const buscaEl = document.getElementById('busca');
   if (buscaEl) {
     buscaEl.addEventListener('input', e => buscarFerramentas(e.target.value));
@@ -301,7 +377,6 @@ function initUI() {
     console.warn('Elemento de busca (id="busca") não encontrado no DOM.');
   }
 
-  // render inicial
   try {
     renderizarFerramentas(ferramentas[categoriaAtual]);
   } catch (err) {
@@ -309,7 +384,6 @@ function initUI() {
   }
 }
 
-// Inicializa a UI quando o DOM estiver pronto
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', initUI);
 } else {

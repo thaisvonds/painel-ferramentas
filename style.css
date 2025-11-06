@@ -87,7 +87,7 @@ body {
     display: flex;
     justify-content: center; /* centraliza as duas colunas como um grupo */
     align-items: flex-start;
-    gap: 3rem; /* separação sutil entre os blocos */
+    gap: 3rem; 
     flex-wrap: wrap; /* empilha no mobile */
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
@@ -96,7 +96,7 @@ body {
 .coluna-igen, .coluna-externa {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza H2 + menus dentro de cada coluna */
+    align-items: center; 
     text-align: center;
 }
 
@@ -118,31 +118,29 @@ body {
 }
 
 .menu-categorias-externas .item-nav-wrapper {
-    background-color: #fafcff; 
+    background-color: transparent;
 }
 
 .menu-categorias-externas .item-nav {
     background-color: #f4f8ff; 
 }
 
-/* Hover do próprio botão Externas (não apenas do wrapper) */
 .menu-categorias-externas .item-nav:hover {
-    background-color: #eaf2ff; /* hover ligeiro e claro */
+    background-color: #d4e1f5; 
 }
 
 .menu-categorias-externas .item-nav-wrapper:hover {
-    background-color: #f3f7ff; /* leve variação no hover, bem claro */
+    background-color: transparent;
 }
 
-/* Harmonização da seta no bloco Externas */
 .menu-categorias-externas .seta-dropdown {
-    border-left: 1px solid #e0e9f9; /* borda ainda mais suave */
-    background-color: #fafcff; /* alinha com wrapper mais claro */
+    border-left: 1px solid #e0e9f9; 
+    background-color: #fafcff;
     color: #174a9e;
 }
 
 .menu-categorias-externas .seta-dropdown:hover {
-    background-color: #f3f7ff; /* hover combinando, claro */
+    background-color: #f3f7ff; 
     color: #0d2c5a;
 }
 
@@ -153,11 +151,10 @@ body {
     }
 }
 
-/* Colunas centralizadas */
 .coluna-igen, .coluna-externa {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza título e botões */
+    align-items: center; 
     gap: 1rem;
 }
 
@@ -169,7 +166,6 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* Botões centralizados dentro de cada coluna */
 .menu-categorias, .menu-categorias-externas {
     display: flex;
     justify-content: center;
@@ -186,7 +182,7 @@ body {
 .menu-categorias-externas .item-nav {
     padding: 0.75rem 1.5rem;
     border: none;
-    border-radius: 25px;
+    border-radius: 25px 0 0 25px;
     background-color: #bfd0e9;
     color: rgba(0,0,0,0.87);
     font-weight: 600;
@@ -197,10 +193,12 @@ body {
 .menu-categorias .item-nav:hover,
 .menu-categorias-externas .item-nav:hover {
     background: #85a0c9;
+    border-radius: 25px 0 0 25px;
 }
 
 .menu-categorias .item-nav.ativo {
     background: #9eb0cf;
+    border-radius: 25px 0 0 25px;
 }
 
 .dropdown {
@@ -211,34 +209,35 @@ body {
 .item-nav-wrapper {
     display: flex;
     align-items: center;
-    background-color: #dbe6f7;
+    background-color: transparent;
     border-radius: 25px;
-    overflow: hidden;
+    overflow: visible;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     transition: background 0.3s ease;
 }
 
+.menu-categorias .item-nav-wrapper {
+    box-shadow: none;
+    border: none;
+}
+
 .item-nav-wrapper:hover {
-    background-color: #c7d6ed;
+    background-color: transparent;
 }
 
 .item-nav {
     flex: 1;
     padding: 0.75rem 1rem;
     border: none;
-    background: none;
     font-weight: 600;
     color: rgba(0,0,0,0.87);
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.item-nav:hover {
-    background: none;
-}
 
 .seta-dropdown {
-    background: none;
+    background-color: #dbe6f7;
     border: none;
     border-left: 1px solid #b0bed6;
     padding: 0.75rem 1rem;
@@ -246,6 +245,7 @@ body {
     font-size: 1rem;
     color: #174a9e;
     transition: background 0.3s ease, color 0.3s ease;
+    border-radius: 0 25px 25px 0; /* canto direito arredondado apenas na seta */
 }
 
 .seta-dropdown:hover {
@@ -397,21 +397,39 @@ body {
     .submenu { min-width: 160px; font-size: 0.95rem; left: 0; right: auto; }
 }
 
-/* Override específico (no final do arquivo) para clarear o botão "Externas"
-   — vence a regra genérica `.menu-categorias-externas .item-nav { background: #BFD0E9 }` */
 .menu-categorias-externas .item-nav {
     background-color: #f7fbff; /* azul quase branco, mais claro que #BFD0E9 */
 }
 .menu-categorias-externas .item-nav:hover {
-    background-color: #eef5ff; /* leve realce no hover mantendo claridade */
+    background-color: #eef5ff;
 }
 .menu-categorias-externas .item-nav-wrapper {
-    background-color: #fcfdff; /* wrapper ainda mais claro para não pesar */
+    background-color: #fcfdff;
 }
 .menu-categorias-externas .seta-dropdown {
-    border-left-color: #e6effb; /* borda sutil no mesmo espectro */
+    border-left-color: #e6effb;
     background-color: #fcfdff;
 }
 .menu-categorias-externas .seta-dropdown:hover {
     background-color: #f3f7ff;
+}
+
+/* Mantém o botão 'Em Desenvolvimento' totalmente arredondado (apenas esse)
+   usando seletor específico para não afetar os demais botões/sets */
+.dropdown[data-categoria="desenvolvimento"] .item-nav {
+    border-radius: 25px !important;
+    background-color: #bfd0e9;
+}
+
+/* Hover e estado ativo para o botão 'Em Desenvolvimento' */
+.dropdown[data-categoria="desenvolvimento"] .item-nav:hover,
+.dropdown[data-categoria="desenvolvimento"] .item-nav.ativo {
+    background: #9eb0cf;
+    border-radius: 25px !important;
+}
+
+/* Estado ativo (quando selecionado) para o botão Externas */
+.menu-categorias-externas .item-nav.ativo {
+    /* escurece levemente em relação ao fundo muito claro do botão Externas */
+    background-color: #e6f0ff;
 }
