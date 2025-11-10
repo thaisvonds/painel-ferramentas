@@ -18,7 +18,7 @@ Entre os principais destaques estão:
 <img width="207" height="448" alt="2mobile" src="https://github.com/user-attachments/assets/46eec008-9876-4eff-a58d-89ec8d480e93" />
 
 
-## 🧩 Estrutura e Navegação
+## Estrutura e Navegação
 
 O painel é dividido em seções que representam as diferentes categorias de ferramentas, apresentadas através de **botões e cards interativos**.  
 Cada elemento possui uma breve descrição e um link que leva diretamente à aplicação correspondente.
@@ -57,7 +57,7 @@ Esses logotipos são **clicáveis** e direcionam o usuário para os **sites ofic
 <img width="1433" height="89" alt="6logos" src="https://github.com/user-attachments/assets/5e9ba106-2fbc-4a95-9c10-cbe4b89d6385" />
 
 
-## 🧱 Tecnologias utilizadas
+## Tecnologias utilizadas
 
 - **HTML5** – Estrutura e conteúdo  
 - **CSS3** – Estilização e layout responsivo  
@@ -65,7 +65,7 @@ Esses logotipos são **clicáveis** e direcionam o usuário para os **sites ofic
 
 ---
 
-## 👩‍💻 Autoria
+## Autoria
 
 Desenvolvido por **Thaís Cavalcante**  
 Instituto de Imunogenética – IGEN
