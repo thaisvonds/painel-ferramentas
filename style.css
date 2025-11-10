@@ -409,7 +409,6 @@ body {
     margin-top: auto;
 }
 
-/* MOBILE */
 @media (max-width: 900px) {
     .grupo-ferramentas-linha {
         flex-direction: column;

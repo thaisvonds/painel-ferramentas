@@ -414,7 +414,6 @@ function buscarFerramentas(term) {
     (f.descricao && normalizeText(f.descricao).includes(query))
   );
 
-  // ✅ FIX 7: Mensagem quando nenhum resultado encontrado
   if (filtradas.length === 0) {
     const container = document.getElementById('container-ferramentas');
     container.innerHTML = `
@@ -445,7 +444,6 @@ function initUI() {
       btnCategoria.addEventListener('click', () => {
         atualizarCategoria(drop.dataset.categoria);
         
-        // Fecha dropdown se estiver aberto
         if (drop.classList.contains('aberto')) {
           drop.classList.remove('aberto');
           if (btnSeta) btnSeta.setAttribute('aria-expanded', 'false');
@@ -460,7 +458,6 @@ function initUI() {
       btnSeta.addEventListener('click', (e) => {
         e.stopPropagation();
 
-        // ✅ FIX 5: Sincroniza atributos ARIA ao fechar outros dropdowns
         document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
           if (openDrop !== drop) {
             openDrop.classList.remove('aberto');
@@ -471,23 +468,19 @@ function initUI() {
           }
         });
         
-        // Alterna estado do dropdown atual
         const isOpen = drop.classList.toggle('aberto');
         
-        // ✅ Sincroniza ARIA
         btnSeta.setAttribute('aria-expanded', isOpen);
         if (submenu) submenu.setAttribute('aria-hidden', !isOpen);
       });
     }
   });
 
-  // Fecha dropdowns ao clicar fora
   document.addEventListener('click', (e) => {
     document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
       if (!openDrop.contains(e.target)) {
         openDrop.classList.remove('aberto');
         
-        // ✅ Sincroniza ARIA ao fechar
         const seta = openDrop.querySelector('[data-acao="menu"]');
         const submenu = openDrop.querySelector('.submenu');
         if (seta) seta.setAttribute('aria-expanded', 'false');
@@ -496,7 +489,6 @@ function initUI() {
     });
   });
   
-  // ✅ FIX 6: Suporte a teclado (Escape fecha dropdowns)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
