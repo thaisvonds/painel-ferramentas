@@ -4,14 +4,14 @@ const ferramentas = {
     {
       nome: "Calculadora cPRA",
       descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorológicos clássicos.",
-      url: "https://calculadorapra.igen.org.br/calculadora",
+      url: "https://www.igen.org.br/calculadorapra/",
       logo: "imagens/logo-pra-imgt.png"
     },
 
     {
       nome: "Calculadora cPRA – 18ºIHIWS",
-      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorotipos determinados no 18° WS.                                                             ",
-      url: "https://calculadorapra18ws.igen.org.br/calculadora",
+      descricao: "Calcula o percentual de PRA I, II e I+II com base nos sorotipos determinados no 18° WS",
+      url: "https://www.igen.org.br/calculadorapra18ws/",
       logo: "imagens/pra-18.png"
     },
 
@@ -25,14 +25,14 @@ const ferramentas = {
     {
       nome: "M.A.R.Co",
       descricao: "Analisa correlações de MFI entre antígenos HLA para definir cutoffs personalizados e identificar discrepâncias.",
-      url: "https://marco.igen.org.br/",
+      url: "https://www.igen.org.br/marco/",
       logo: "imagens/marco.png"
     },
 
     {
       nome: "GE.R.BASE",
       descricao: "Consulta de frequências alélicas e haplotípicas de HLA em alta resolução e análise de Desequilíbrio de Ligação (LD).",
-      url: "https://gerbase.igen.org.br/calculo/frequencia-hla",
+      url: "https://www.igen.org.br/gerbase/",
       logo: "imagens/gerbase.png"
     },
 
@@ -44,7 +44,7 @@ const ferramentas = {
     {
       nome: "BeadScan",
       descricao: "Monitora a leitura no luminex de acordo com parametrização prévia.",
-      url: "https://beadscan.igen.org.br",
+      url: "http://172.22.33.147:3002/",
       logo: "imagens/bead.png"
     },
 
@@ -72,7 +72,7 @@ const ferramentas = {
 
     {
       nome: "HLA Signal Peptide Mismatch Tool",
-      descricao: "Descrição",
+      descricao: "Identifica peptídeo(s) presente(s) no peptídeo sinal de alguns HLA classe I, presentes nos doadores e ausentes nos receptores, compartilhados com algumas cepas de citomegalovírus (CMV).",
       url: "http://vm-igen-102:18080/",
       logo: "imagens/peptide.svg" 
 
@@ -80,21 +80,21 @@ const ferramentas = {
 
     {
       nome: "Prova Cruzada Virtual vs FlowXm",
-      descricao: "Descrição.",
+      descricao: "Realiza a busca de valores de MFI de anticorpos direcionados a antígenos HLA de doadores falecidos, a partir de soros previamente escolhidos de receptores em lista de oferta de órgãos.",
       url: "http://df-fcxm/",
       logo: "imagens/provacruzada.svg"
     },
 
     {
       nome: "Faseador HLA",
-      descricao: "Descrição.",
+      descricao: "Determina a provável fase (haplótipos) de tipagens HLAs B/C; DRB1345/DQA/B e DPA/B e imputa resultados de alta resolução a partir de dados de média resolução.",
       url: "http://vm-igen-119:8501/",
       logo: "imagens/faseador.png"
     },
 
     {
       nome: "Busca e contagem de Alelo no Redome",
-      descricao: "Descrição",
+      descricao: "Ferramenta de consulta de genótipos com base em filtros por alelos específicos na base do REDOME com cerca 450.000 doadores tipificados por NGS.",
       url: "http://vm-igen-119:8095/",
       logo: "imagens/buscaredome.png"
     },
@@ -108,7 +108,7 @@ const ferramentas = {
 
     {
       nome: "Tipagem Redome",
-      descricao: "Descrição",
+      descricao: "Gera os arquivos de resultados a serem importados para o sistema REDOMEWeb.",
       url: "http://vm-igen-119:4301/redome",
       logo: "imagens/redometipagem.png" 
 
@@ -124,14 +124,14 @@ const ferramentas = {
    {
       nome: "Igen SSO – G1",
       descricao: "Busca, através de um encaminhamento, os genótipos classificados como G1 de uma tipagem HLA realizada por SSO.",
-      url: "https://sso.igen.org.br",
+      url: "http://vm-igen-101:3000/allele-pair-analysis",
       logo: "imagens/igen-sso.png"
     },
 
 
     {
       nome: "Igenlab-CT",
-      descricao: "Ferramenta para preencher os dados da central de transplantes com dados do Igenlab",
+      descricao: "Ferramenta para preencher os dados da central de transplantes com dados do Igenlab.",
       url: "http://tools.igenlab.igen.local:4000/",
       logo: "imagens/igenct.png"
     }
@@ -196,8 +196,8 @@ const ferramentas = {
 
   desenvolvimento: [
     {
-      nome: "MFI vs FlowXM no DF",
-      descricao: "Dado consolidado do resultado da citometria de fluxo e os valores de MFIs dos DSAs encontrados nos exames de PRA."
+      nome: "Status Sensibilização automático no DF",
+      descricao: "Realiza automaticamente o status de sensibilização e escolha de soro de listas de DF. Integra o resultado com o Igenlab."
     },
 
     {
@@ -223,9 +223,48 @@ const descricoesCategoria = {
 
 let categoriaAtual = 'web';
 
+function popularSubmenus() {
+  const mapa = {
+    web: document.getElementById('submenu-web'),
+    interna: document.getElementById('submenu-interna'),
+    online: document.getElementById('submenu-online')
+  };
+
+  Object.entries(mapa).forEach(([categoria, ul]) => {
+    if (!ul) return;
+    const lista = ferramentas[categoria];
+    if (!Array.isArray(lista)) return;
+
+    ul.innerHTML = '';
+
+    lista.forEach(f => {
+      if (!f || !f.nome) return;
+      const li = document.createElement('li');
+      li.setAttribute('role', 'none');
+      if (f.url) {
+        const a = document.createElement('a');
+        a.textContent = f.nome;
+        a.href = f.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.setAttribute('role', 'menuitem');
+        li.appendChild(a);
+      } else {
+        const span = document.createElement('span');
+        span.textContent = f.nome;
+        span.style.cursor = 'default';
+        li.appendChild(span);
+      }
+      ul.appendChild(li);
+    });
+  });
+}
+
 function renderizarFerramentas(lista) {
   const container = document.getElementById('container-ferramentas');
   container.innerHTML = '';
+
+  const imagensCarregando = [];
 
   lista.forEach(f => {
     let card;
@@ -234,6 +273,7 @@ function renderizarFerramentas(lista) {
       card = document.createElement('a');
       card.href = f.url;
       card.target = "_blank";
+      card.rel = "noopener noreferrer";
     } else {
       card = document.createElement('div');
       card.style.cursor = "default"; 
@@ -241,19 +281,66 @@ function renderizarFerramentas(lista) {
 
     card.className = 'card-ferramenta';
     
-    card.innerHTML = `
-      <div class="titulo-card">
-        ${f.logo ? `<img src="${f.logo}" alt="${f.nome}" class="logo-card">` : ''}
-        <h3>${f.nome}</h3>
-      </div>
-      <p>${f.descricao}</p>
-    `;
-
+    const tituloCard = document.createElement('div');
+    tituloCard.className = 'titulo-card';
+    
+    if (f.logo) {
+      const logoWrapper = document.createElement('div');
+      logoWrapper.className = 'logo-wrapper';
+      
+      const skeleton = document.createElement('div');
+      skeleton.className = 'logo-skeleton';
+      
+      const img = document.createElement('img');
+      img.src = f.logo;
+      img.alt = f.nome; 
+      img.className = 'logo-card';
+      img.loading = 'lazy';
+      
+      logoWrapper.appendChild(skeleton);
+      logoWrapper.appendChild(img);
+      tituloCard.appendChild(logoWrapper);
+      
+      const imagemPromise = new Promise(resolve => {
+        if (img.complete) {
+          skeleton.style.display = 'none';
+          img.style.opacity = '1';
+          resolve();
+        } else {
+          img.addEventListener('load', () => {
+            skeleton.style.display = 'none';
+            img.style.opacity = '1';
+            resolve();
+          }, { once: true });
+          
+          img.addEventListener('error', () => {
+            skeleton.style.display = 'none';
+            resolve();
+          }, { once: true });
+        }
+      });
+      
+      imagensCarregando.push(imagemPromise);
+    }
+    
+    const h3 = document.createElement('h3');
+    h3.textContent = f.nome;
+    tituloCard.appendChild(h3);
+    
+    const p = document.createElement('p');
+    p.textContent = f.descricao;
+    
+    card.appendChild(tituloCard);
+    card.appendChild(p);
     container.appendChild(card);
   });
 
-    // após renderizar, equaliza alturas conforme largura da tela
+  Promise.all(imagensCarregando).then(() => {
     equalizeCardHeights();
+  }).catch(err => {
+    console.error('Erro ao carregar imagens:', err);
+    equalizeCardHeights();
+  });
 }
 
   function equalizeCardHeights() {
@@ -273,9 +360,9 @@ function renderizarFerramentas(lista) {
 
   function debounce(fn, wait = 120) {
     let t;
-    return (...args) => {
+    return function(...args) {
       clearTimeout(t);
-      t = setTimeout(() => fn.apply(this, args), wait);
+      t = setTimeout(() => fn(...args), wait);
     };
   }
 
@@ -285,11 +372,6 @@ function renderizarFerramentas(lista) {
 
 function atualizarCategoria(categoria) {
   categoriaAtual = categoria;
-
-  // Ver depois se será útil colocar esses titulos na pagina, para indicar em qual categoria esta... Se for decidido colocar, não esquecer de criar no HTML tambem
-
-//   document.getElementById('titulo-categoria').textContent = titulosCategoria[categoria];
-//   document.getElementById('descricao-categoria').textContent = descricoesCategoria[categoria];
 
   document.querySelectorAll('.item-nav').forEach(item => item.classList.remove('ativo'));
   const categoriaBtn = document.querySelector(`[data-categoria="${categoria}"] .item-nav`);
@@ -332,17 +414,43 @@ function buscarFerramentas(term) {
     (f.descricao && normalizeText(f.descricao).includes(query))
   );
 
+  // ✅ FIX 7: Mensagem quando nenhum resultado encontrado
+  if (filtradas.length === 0) {
+    const container = document.getElementById('container-ferramentas');
+    container.innerHTML = `
+      <div class="mensagem-vazia" style="
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        color: rgba(0,0,0,0.6);
+      ">
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Nenhuma ferramenta encontrada</p>
+        <p style="font-size: 0.9rem;">Tente buscar por outro termo</p>
+      </div>
+    `;
+    return;
+  }
+
   renderizarFerramentas(filtradas);
 }
 
 function initUI() {
+  popularSubmenus();
   document.querySelectorAll('.dropdown').forEach(drop => {
     const btnCategoria = drop.querySelector('[data-acao="categoria"]');
     const btnSeta = drop.querySelector('[data-acao="menu"]');
+    const submenu = drop.querySelector('.submenu');
 
     if (btnCategoria) {
       btnCategoria.addEventListener('click', () => {
         atualizarCategoria(drop.dataset.categoria);
+        
+        // Fecha dropdown se estiver aberto
+        if (drop.classList.contains('aberto')) {
+          drop.classList.remove('aberto');
+          if (btnSeta) btnSeta.setAttribute('aria-expanded', 'false');
+          if (submenu) submenu.setAttribute('aria-hidden', 'true');
+        }
       });
     } else {
       console.warn('Dropdown sem botão de categoria encontrado:', drop);
@@ -352,22 +460,53 @@ function initUI() {
       btnSeta.addEventListener('click', (e) => {
         e.stopPropagation();
 
+        // ✅ FIX 5: Sincroniza atributos ARIA ao fechar outros dropdowns
         document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
           if (openDrop !== drop) {
             openDrop.classList.remove('aberto');
+            const otherSeta = openDrop.querySelector('[data-acao="menu"]');
+            const otherSubmenu = openDrop.querySelector('.submenu');
+            if (otherSeta) otherSeta.setAttribute('aria-expanded', 'false');
+            if (otherSubmenu) otherSubmenu.setAttribute('aria-hidden', 'true');
           }
         });
-        drop.classList.toggle('aberto');
+        
+        // Alterna estado do dropdown atual
+        const isOpen = drop.classList.toggle('aberto');
+        
+        // ✅ Sincroniza ARIA
+        btnSeta.setAttribute('aria-expanded', isOpen);
+        if (submenu) submenu.setAttribute('aria-hidden', !isOpen);
       });
     }
   });
 
+  // Fecha dropdowns ao clicar fora
   document.addEventListener('click', (e) => {
     document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
       if (!openDrop.contains(e.target)) {
         openDrop.classList.remove('aberto');
+        
+        // ✅ Sincroniza ARIA ao fechar
+        const seta = openDrop.querySelector('[data-acao="menu"]');
+        const submenu = openDrop.querySelector('.submenu');
+        if (seta) seta.setAttribute('aria-expanded', 'false');
+        if (submenu) submenu.setAttribute('aria-hidden', 'true');
       }
     });
+  });
+  
+  // ✅ FIX 6: Suporte a teclado (Escape fecha dropdowns)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.dropdown.aberto').forEach(openDrop => {
+        openDrop.classList.remove('aberto');
+        const seta = openDrop.querySelector('[data-acao="menu"]');
+        const submenu = openDrop.querySelector('.submenu');
+        if (seta) seta.setAttribute('aria-expanded', 'false');
+        if (submenu) submenu.setAttribute('aria-hidden', 'true');
+      });
+    }
   });
 
   const buscaEl = document.getElementById('busca');
