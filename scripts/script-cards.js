@@ -260,13 +260,20 @@ function popularSubmenus() {
   });
 }
 
-function renderizarFerramentas(lista) {
+// NOVA ABORDAGEM: Renderiza TUDO uma vez, depois apenas mostra/esconde
+function renderizarTodosOsCards() {
   const container = document.getElementById('container-ferramentas');
   container.innerHTML = '';
 
   const imagensCarregando = [];
+  const todasFerramentas = [
+    ...ferramentas.web.map(f => ({...f, categoria: 'web'})),
+    ...ferramentas.interna.map(f => ({...f, categoria: 'interna'})),
+    ...(ferramentas.online || []).map(f => ({...f, categoria: 'online'})),
+    ...ferramentas.desenvolvimento.map(f => ({...f, categoria: 'desenvolvimento'}))
+  ];
 
-  lista.forEach(f => {
+  todasFerramentas.forEach(f => {
     let card;
 
     if (f.url) {
@@ -280,6 +287,11 @@ function renderizarFerramentas(lista) {
     }
 
     card.className = 'card-ferramenta';
+    
+    // ✅ Adiciona atributos data-* para filtragem
+    card.dataset.categoria = f.categoria;
+    card.dataset.nome = normalizeText(f.nome);
+    card.dataset.descricao = f.descricao ? normalizeText(f.descricao) : '';
     
     const tituloCard = document.createElement('div');
     tituloCard.className = 'titulo-card';
@@ -343,6 +355,64 @@ function renderizarFerramentas(lista) {
   });
 }
 
+// ✅ FILTRA cards já renderizados (sem reconstruir HTML)
+function filtrarCards(categoria = null, termoBusca = '') {
+  const container = document.getElementById('container-ferramentas');
+  const cards = container.querySelectorAll('.card-ferramenta');
+  const query = normalizeText(termoBusca);
+  
+  let visiveisCont = 0;
+
+  cards.forEach(card => {
+    const categoriaCard = card.dataset.categoria;
+    const nomeCard = card.dataset.nome;
+    const descricaoCard = card.dataset.descricao;
+    
+    // Verifica categoria
+    const matchCategoria = !categoria || categoriaCard === categoria;
+    
+    // Verifica busca
+    const matchBusca = !query || 
+      nomeCard.includes(query) || 
+      descricaoCard.includes(query);
+    
+    // Mostra/esconde baseado nos filtros
+    if (matchCategoria && matchBusca) {
+      card.style.display = '';
+      visiveisCont++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  let mensagemVazia = container.querySelector('.mensagem-vazia');
+  
+  if (visiveisCont === 0) {
+    if (!mensagemVazia) {
+      mensagemVazia = document.createElement('div');
+      mensagemVazia.className = 'mensagem-vazia';
+      mensagemVazia.style.cssText = `
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem;
+        color: rgba(0,0,0,0.6);
+      `;
+      mensagemVazia.innerHTML = `
+        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Nenhuma ferramenta encontrada</p>
+        <p style="font-size: 0.9rem;">Tente buscar por outro termo</p>
+      `;
+      container.appendChild(mensagemVazia);
+    }
+    mensagemVazia.style.display = '';
+  } else {
+    if (mensagemVazia) {
+      mensagemVazia.style.display = 'none';
+    }
+  }
+
+  equalizeCardHeights();
+}
+
   function equalizeCardHeights() {
     const cards = Array.from(document.querySelectorAll('.card-ferramenta'));
     if (!cards.length) return;
@@ -378,11 +448,13 @@ function atualizarCategoria(categoria) {
   if (categoriaBtn) {
     categoriaBtn.classList.add('ativo');
   } else {
-
     console.warn(`Botão da categoria '${categoria}' não encontrado no DOM.`);
   }
 
-  renderizarFerramentas(ferramentas[categoria]);
+  // ✅ Apenas filtra cards já existentes (não reconstrói HTML)
+  const buscaEl = document.getElementById('busca');
+  const termoBusca = buscaEl ? buscaEl.value : '';
+  filtrarCards(categoria, termoBusca);
 }
 
 function normalizeText(text) {
@@ -396,41 +468,11 @@ function normalizeText(text) {
 }
 
 function buscarFerramentas(term) {
-  if(!term) {
-    renderizarFerramentas(ferramentas[categoriaAtual]);
-    return;
+  if (term.trim()) {
+    filtrarCards(null, term);
+  } else {
+    filtrarCards(categoriaAtual, '');
   }
-
-  const query = normalizeText(term);
-  const todas = [
-    ...ferramentas.web,
-    ...ferramentas.interna,
-    ...(ferramentas.online || []),
-    ...ferramentas.desenvolvimento
-  ];
-
-  const filtradas = todas.filter(f => 
-    normalizeText(f.nome).includes(query) ||
-    (f.descricao && normalizeText(f.descricao).includes(query))
-  );
-
-  if (filtradas.length === 0) {
-    const container = document.getElementById('container-ferramentas');
-    container.innerHTML = `
-      <div class="mensagem-vazia" style="
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 3rem;
-        color: rgba(0,0,0,0.6);
-      ">
-        <p style="font-size: 1.2rem; margin-bottom: 0.5rem;">Nenhuma ferramenta encontrada</p>
-        <p style="font-size: 0.9rem;">Tente buscar por outro termo</p>
-      </div>
-    `;
-    return;
-  }
-
-  renderizarFerramentas(filtradas);
 }
 
 function initUI() {
@@ -509,7 +551,10 @@ function initUI() {
   }
 
   try {
-    renderizarFerramentas(ferramentas[categoriaAtual]);
+    // ✅ Renderiza TODOS os cards uma única vez
+    renderizarTodosOsCards();
+    // ✅ Aplica filtro inicial para mostrar apenas a categoria ativa
+    filtrarCards(categoriaAtual, '');
   } catch (err) {
     console.error('Erro ao renderizar ferramentas:', err);
   }
