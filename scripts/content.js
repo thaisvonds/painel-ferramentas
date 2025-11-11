@@ -1,0 +1,1 @@
+const el = document.querySelector('.site-inner > p'); el.textContent = el.textContent.replace('{{currentYear}}', new Date().getFullYear());

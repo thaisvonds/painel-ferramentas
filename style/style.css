@@ -285,6 +285,7 @@ body {
     color: rgba(0,0,0,0.87);
     white-space: nowrap;
     cursor: pointer;
+    text-align: left;
 }
 
 .submenu li:hover {
@@ -351,7 +352,7 @@ body {
 .logo-card {
     width: 70px;
     height: 70px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -364,10 +365,10 @@ body {
     width: 70px;
     height: 70px;
     background: linear-gradient(
-        90deg,
-        #e0e0e0 0%,
-        #f0f0f0 50%,
-        #e0e0e0 100%
+    90deg,
+    #e0e0e0 0%,
+    #f0f0f0 50%,
+    #e0e0e0 100%
     );
     background-size: 200% 100%;
     border-radius: 10px;
@@ -480,7 +481,7 @@ body {
 }
 
 /* Mantém o botão 'Em Desenvolvimento' totalmente arredondado (apenas esse)
-   usando seletor específico para não afetar os demais botões/sets */
+usando seletor específico para não afetar os demais botões/sets */
 .dropdown[data-categoria="desenvolvimento"] .item-nav {
     border-radius: 25px !important;
     background-color: #bfd0e9;
@@ -494,4 +495,21 @@ body {
 
 .menu-categorias-externas .item-nav.ativo {
     background-color: #e6f0ff;
+}
+
+.item-nav-wrapper > button {
+    height: 2.5rem;
+}
+
+.menu-categorias .item-nav-wrapper .seta-dropdown {
+    border: 1px solid #bfd0e9;
+}
+
+.seta-dropdown > span {
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.seta-dropdown:hover > span {
+    transform: translate(0, 2px);
 }

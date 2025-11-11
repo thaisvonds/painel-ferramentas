@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <link rel="icon" type="image/png" href="imagens/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Painel de ferramentas - Igen</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Painel de Ferramentas - Igen</title>
+  <link rel="stylesheet" href="/style/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -18,7 +18,7 @@
         </a>
       </div>
       <div class="container-busca">
-        <input type="text" id="busca" placeholder="Buscar ferramentas..." class="input-busca">
+        <input type="text" id="busca" placeholder="Buscar ferramentas..." class="input-busca" />
       </div>
       <div class="logo-direita">
         <a href="https://www.afip.com.br" target="_blank" rel="noopener noreferrer" aria-label="Ir para o site oficial da AFIP">
@@ -41,7 +41,9 @@
         <div class="dropdown" data-categoria="web">
           <div class="item-nav-wrapper">
             <button class="item-nav" type="button" data-acao="categoria" aria-expanded="false" aria-controls="submenu-web">Ferramentas Web</button>
-            <button class="seta-dropdown" type="button" data-acao="menu" aria-label="Abrir submenu Ferramentas Web" aria-expanded="false" aria-controls="submenu-web">▼</button>
+            <button class="seta-dropdown" type="button" data-acao="menu" aria-label="Abrir submenu Ferramentas Web" aria-expanded="false" aria-controls="submenu-web">
+              <span>▼</span>
+            </button>
           </div>
           <ul id="submenu-web" class="submenu" role="menu" aria-hidden="true">
             <li role="none"><a role="menuitem" href="https://calculadorapra.igen.org.br/calculadora" target="_blank" rel="noopener">Calculadora cPRA</a></li>
@@ -56,7 +58,9 @@
         <div class="dropdown" data-categoria="interna">
           <div class="item-nav-wrapper">
             <button class="item-nav" type="button" data-acao="categoria" aria-expanded="false" aria-controls="submenu-interna">Ferramentas Internas</button>
-            <button class="seta-dropdown" type="button" data-acao="menu" aria-label="Abrir submenu Ferramentas Internas" aria-expanded="false" aria-controls="submenu-interna">▼</button>
+            <button class="seta-dropdown" type="button" data-acao="menu" aria-label="Abrir submenu Ferramentas Internas" aria-expanded="false" aria-controls="submenu-interna">
+              <span>▼</span>
+            </button>
           </div>
           <ul id="submenu-interna" class="submenu" role="menu" aria-hidden="true">
             <li role="none"><a role="menuitem" href="https://sso.igen.org.br" target="_blank" rel="noopener">Igen SSO – G1</a></li>
@@ -84,7 +88,9 @@
         <div class="dropdown" data-categoria="online">
           <div class="item-nav-wrapper">
             <button class="item-nav" type="button" data-acao="categoria" aria-expanded="false" aria-controls="submenu-online">Externas</button>
-            <button class="seta-dropdown" type="button" data-acao="menu" aria-label="Abrir submenu Ferramentas Externas" aria-expanded="false" aria-controls="submenu-online">▼</button>
+            <button class="seta-dropdown" type="button" data-acao="menu" aria-label="Abrir submenu Ferramentas Externas" aria-expanded="false" aria-controls="submenu-online">
+              <span>▼</span>
+            </button>
           </div>
           <ul id="submenu-online" class="submenu" role="menu" aria-hidden="true">
             <li role="none"><a role="menuitem" href="https://hla.alleles.org/" target="_blank" rel="noopener">Nomenclatura HLA</a></li>
@@ -104,10 +110,11 @@
 
 <footer class="footer">
   <div class="site-inner">
-    <p>&copy; 2025 IGEN Todos os direitos reservados.</p>
+    <p>&copy; {{currentYear}} IGEN Todos os direitos reservados.</p>
   </div>
 </footer>
 
-<script src="script-cards.js"></script>
+<script src="/scripts/script-cards.js"></script>
+<script src="/scripts/content.js"></script>
 </body>
 </html>
