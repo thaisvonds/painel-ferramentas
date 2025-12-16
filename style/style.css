@@ -513,3 +513,4 @@ usando seletor específico para não afetar os demais botões/sets */
 .seta-dropdown:hover > span {
     transform: translate(0, 2px);
 }
+
